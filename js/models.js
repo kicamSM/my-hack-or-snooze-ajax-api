@@ -39,20 +39,8 @@ class StoryList {
     this.stories = stories;
   }
 
-  async addStory(user, { title, author, url }) {
-    const token = user.loginToken;
-    const response = await axios({
-      method: "POST",
-      url: `${BASE_URL}/stories`,
-      data: { token, story: { title, author, url } },
-    });
 
-    const story = new Story(response.data.story);
-    this.stories.unshift(story);
-    user.ownStories.unshift(story);
-
-    return story;
-  }
+  //follow up with mentor regarding this function 
 
   /** Generate a new StoryList. It:
    *
@@ -88,11 +76,23 @@ class StoryList {
    * Returns the new Story instance
    */
 
-  async addStory( /* user, newStory */) {
-    // UNIMPLEMENTED: complete this function!
+  async addStory(user, { title, author, url }) {
+    const token = user.loginToken;
+    console.log(token)
+    const response = await axios({
+      method: "POST",
+      url: `${BASE_URL}/stories`,
+      data: { token, story: { title, author, url } },
+    });
+    console.log(response)
+
+    const story = new Story(response.data.story);
+    this.stories.unshift(story);
+    user.ownStories.unshift(story);
+console.log(story)
+    return story;
   }
 }
-
 
 /******************************************************************************
  * User: a user in the system (only used to represent the current user)

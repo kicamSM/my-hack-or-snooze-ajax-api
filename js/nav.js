@@ -34,3 +34,17 @@ function updateNavOnLogin() {
   $navLogOut.show();
   $navUserProfile.text(`${currentUser.username}`).show();
 }
+
+
+// $submit.on("click", navAddStory);
+// const submitBtn = document.getElementById('submitBtn')
+
+$submitBtn.on("click", navAddStory);
+
+console.log($submitBtn)
+function navAddStory() {
+// console.debug("navAddStory");
+// $submit.hide();
+// $submit.show();
+console.log('Clicked Submit!')
+}

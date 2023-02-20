@@ -50,3 +50,8 @@ function putStoriesOnPage() {
 
   $allStoriesList.show();
 }
+
+function addNewStories() {
+  const authInpTxt = $authorInput.innerHTML
+  console.log(authInpTxt)
+}
