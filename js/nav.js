@@ -47,7 +47,20 @@ function navAddStory(evt) {
   evt.preventDefault()
 console.debug("navAddStory", evt);
 addNewStories()
-$submitBtn.hide();
-$submitBtn.show();
+
+// $navSubmit.hide();
+// $storyForm.removeClass();
+// $submitBtn.hide();
+// $submitBtn.show();
 // console.log('Clicked Submit!')
 }
+
+$navSubmit.on("click", unhideClass);
+
+function unhideClass() {
+  $storyForm.removeClass("hidden")
+}
+
+// $navSubmit.click(function(){
+//   $navSubmit.removeClass("hidden")
+// })

@@ -52,18 +52,22 @@ function putStoriesOnPage() {
 }
 
 function addNewStories(evt) {
-  // evt.preventDefault();
+
   const author = $authorInput.val();
-  console.log(author)
   const title = $storyInput.val();
-  console.log(title);
   const url = $urlInput.val();
-   console.log(url);
-  const username = currentUser.username
-  //not sure where we get this
+
+  const username = currentUser;
 
    let story = storyList.addStory(username, { title: title, author: author, url: url })
    console.log(story)
-
+  // note that when I have the evt.preventDefault() this works  but only when you refresh the page. If the evt.preventDefault() is not there, 
    // take this information and pass it to the function or method which allows it to be appended to the page. 
+
+  //  generateStoryMarkup(story);
+  // putStoriesOnPage(story);
+    $allStoriesList.prepend(story);
+    $storyForm.addClass("hidden")
+    // console.log($allStoriesList)
 }
+// $submitBtn.on("submit", addNewStories)

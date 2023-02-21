@@ -14,6 +14,8 @@ const $navLogin = $("#nav-login");
 const $navUserProfile = $("#nav-user-profile");
 const $navLogOut = $("#nav-logout");
 
+const $storyForm = $('#story-form')
+const $navSubmit = $('#nav-submit')
 const $submitBtn = $("#submitBtn"); 
 const $authorInput = $("#author-input");
 const $storyInput = $("#story-input");
