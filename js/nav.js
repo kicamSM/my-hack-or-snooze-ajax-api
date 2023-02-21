@@ -48,11 +48,6 @@ function navAddStory(evt) {
 console.debug("navAddStory", evt);
 addNewStories()
 
-// $navSubmit.hide();
-// $storyForm.removeClass();
-// $submitBtn.hide();
-// $submitBtn.show();
-// console.log('Clicked Submit!')
 }
 
 $navSubmit.on("click", unhideClass);
@@ -61,6 +56,3 @@ function unhideClass() {
   $storyForm.removeClass("hidden")
 }
 
-// $navSubmit.click(function(){
-//   $navSubmit.removeClass("hidden")
-// })

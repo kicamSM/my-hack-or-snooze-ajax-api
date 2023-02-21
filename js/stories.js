@@ -49,6 +49,7 @@ function putStoriesOnPage() {
   }
 
   $allStoriesList.show();
+  $storyForm.addClass("hidden")
 }
 
 function addNewStories(evt) {
@@ -64,9 +65,9 @@ function addNewStories(evt) {
   // note that when I have the evt.preventDefault() this works  but only when you refresh the page. If the evt.preventDefault() is not there, 
    // take this information and pass it to the function or method which allows it to be appended to the page. 
 
-  //  generateStoryMarkup(story);
+  let storyMockup = generateStoryMarkup(story);
   // putStoriesOnPage(story);
-    $allStoriesList.prepend(story);
+    $allStoriesList.prepend(storyMockup);
     $storyForm.addClass("hidden")
     // console.log($allStoriesList)
 }
