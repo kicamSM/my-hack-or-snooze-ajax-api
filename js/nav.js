@@ -38,13 +38,16 @@ function updateNavOnLogin() {
 
 // $submit.on("click", navAddStory);
 // const submitBtn = document.getElementById('submitBtn')
-
+// console.log(submitBtn)
+// submitBtn.on('click', navAddStory);
 $submitBtn.on("click", navAddStory);
+// console.log($submitBtn)
 
-console.log($submitBtn)
-function navAddStory() {
-// console.debug("navAddStory");
-// $submit.hide();
-// $submit.show();
-console.log('Clicked Submit!')
+function navAddStory(evt) {
+  evt.preventDefault()
+console.debug("navAddStory", evt);
+addNewStories()
+$submitBtn.hide();
+$submitBtn.show();
+// console.log('Clicked Submit!')
 }

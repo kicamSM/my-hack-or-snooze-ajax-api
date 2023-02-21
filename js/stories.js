@@ -51,7 +51,19 @@ function putStoriesOnPage() {
   $allStoriesList.show();
 }
 
-function addNewStories() {
-  const authInpTxt = $authorInput.innerHTML
-  console.log(authInpTxt)
+function addNewStories(evt) {
+  // evt.preventDefault();
+  const author = $authorInput.val();
+  console.log(author)
+  const title = $storyInput.val();
+  console.log(title);
+  const url = $urlInput.val();
+   console.log(url);
+  const username = currentUser.username
+  //not sure where we get this
+
+   let story = storyList.addStory(username, { title: title, author: author, url: url })
+   console.log(story)
+
+   // take this information and pass it to the function or method which allows it to be appended to the page. 
 }

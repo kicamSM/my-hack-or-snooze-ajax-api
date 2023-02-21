@@ -16,7 +16,7 @@ const $navLogOut = $("#nav-logout");
 
 const $submitBtn = $("#submitBtn"); 
 const $authorInput = $("#author-input");
-const $titleInput = $("#title-input");
+const $storyInput = $("#story-input");
 const $urlInput = $("#url-input");
 
 /** To make it easier for individual components to show just themselves, this
