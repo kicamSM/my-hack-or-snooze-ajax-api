@@ -25,6 +25,7 @@ function generateStoryMarkup(story) {
   const hostName = story.getHostName();
   return $(`
       <li id="${story.storyId}">
+      <span class='star fa fa-star-o'></span>
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
@@ -50,7 +51,24 @@ function putStoriesOnPage() {
 
   $allStoriesList.show();
   $storyForm.addClass("hidden")
-}
+
+  const $favoritesStar = $('[class="star"]')
+  //not doing jquery is not working here. Going back to vanilla Javascript for now. 
+
+ let star = document.querySelectorAll("[class='star']");
+
+  $favoritesStar.on("click", function(e) {
+  e.preventDefault()
+  console.log('you clicked the star') } )
+
+  // star.addEventListener("click", function(e) {
+  //   e.preventDefault()
+  //   console.log('you clicked the star')})
+
+  }
+// document.querySelector('.star').addEventListener("click", function(e){console.log('click')})
+
+  // note this has to go here because of order of operations. The class was not run yet. So the class was coming back as null.
 
 function addNewStories(evt) {
 

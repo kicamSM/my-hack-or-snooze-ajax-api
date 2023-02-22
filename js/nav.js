@@ -44,15 +44,36 @@ $submitBtn.on("click", navAddStory);
 // console.log($submitBtn)
 
 function navAddStory(evt) {
-  evt.preventDefault()
+  evt.preventDefault();
 console.debug("navAddStory", evt);
-addNewStories()
+// addNewStories();
 
 }
 
-$navSubmit.on("click", unhideClass);
+$navSubmit.on("click", unhideStoryClass);
 
-function unhideClass() {
+function unhideStoryClass() {
   $storyForm.removeClass("hidden")
 }
+
+$navFavorites.on("click", unhideFavoritesClass())
+
+function unhideFavoritesClass() {
+}
+
+// $favoritesStar.addEventListener("click", addFavorites())
+
+// $favoritesStar.on("click", addFavorites);
+
+// function addFavorites(evt) {
+//   evt.preventDefault();
+//   // console.debug("addFavorites", evt);
+//   console.log('You clicked the star!')
+// }
+// console.log($favoritesStar)
+
+// $favoritesStar.on("click", function(e) {
+//   e.preventDefault()
+//   console.log('you clicked the star')
+// } )
 
