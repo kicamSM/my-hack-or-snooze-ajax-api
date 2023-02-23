@@ -52,20 +52,79 @@ function putStoriesOnPage() {
   $allStoriesList.show();
   $storyForm.addClass("hidden")
 
-  const $favoritesStar = $('[class="star"]')
+  // const $favoritesStar = $('[class="star"]')
   //not doing jquery is not working here. Going back to vanilla Javascript for now. 
 
- let star = document.querySelectorAll("[class='star']");
+//  let star = document.querySelectorAll("[class='star']");
 
-  $favoritesStar.on("click", function(e) {
-  e.preventDefault()
-  console.log('you clicked the star') } )
+  // $favoritesStar.on("click", function(e) {
+  // e.preventDefault()
+  // console.log('you clicked the star') } )
+
+  $allStoriesList.on('click', '.star', function (e) {
+    let target = e.target
+    // console.log(target.className)
+    // console.log(target.hasAttribute="fa fa-star-o")
+
+
+    // let IAmFavorite = target.setAttribute('class', 'fa fa-star');
+    // let notFavorite = target.setAttribute('class', 'fa fa-star-o');
+
+    // notFavorite ? IAmFavorite : notFavorite
+// I think I should be able to use a conditional ternaary operator here but it is not working
+
+    if(target.hasAttribute="fa fa-star-o" ) {
+     target.setAttribute('class', 'fa fa-star star');
+     $allStoriesList.on('click', '.star', clickStarAgain);
+     }
+    //  console.log(target)
+    //  console.log(target.className)
+    }) }
+      //   else {
+      // // target.animVal = 'svg-inline--fa fa-star-o fa-w-18 star'; 
+      // console.log(target.className)
+
+      function clickStarAgain(e){
+          if(e.target.hasAttribute="fa fa-star") {
+   e.target.setAttribute('class', 'fa fa-star-o');
+   console.log(e.target.className)
+    }
+  }
+  
+
+  
+
+    // else {
+    //   target.setAttribute('class', 'fa fa-star-o');
+    //   console.log(target)
+    //    }
+  //   else if(target.hasAttribute="fa fa-star") {
+  //  target.setAttribute('class', 'fa fa-star-o');
+  //  console.log(target)
+  //   }
+
+
+    // else() => target.setAttribute('class', 'fa fa-star-o');
+    
+
+
+
+
+    //this is how you set a class for an svg element 
+
+    // favorite.replace("svg-inline--fa', 'fa-star', 'fa-w-18', 'star', value: 'svg-inline--fa fa-star fa-w-18 star'", "fa-star', value: 'fa-star'")
+
+    // favorite.addClass('fa fa-star');
+
+    // console.log(e.target.className)
+    // console.log(target.hasAttribute="fa fa-star-o")
+    // })
 
   // star.addEventListener("click", function(e) {
   //   e.preventDefault()
   //   console.log('you clicked the star')})
 
-  }
+
 // document.querySelector('.star').addEventListener("click", function(e){console.log('click')})
 
   // note this has to go here because of order of operations. The class was not run yet. So the class was coming back as null.

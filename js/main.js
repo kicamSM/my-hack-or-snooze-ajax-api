@@ -22,8 +22,9 @@ const $storyInput = $("#story-input");
 const $urlInput = $("#url-input");
 
 const $navFavorites = $('#nav-favorites')
+const $favoritesForm = $('#favorites-form')
 const $navMyStories = $('#nav-my-stories')
-const $favoritesStar = $('.fa-star')
+// const $favoritesStar = $('.fa-star')
 /** To make it easier for individual components to show just themselves, this
  * is a useful function that hides pretty much everything on the page. After
  * calling this, individual components can re-show just what they want.
@@ -34,6 +35,8 @@ function hidePageComponents() {
     $allStoriesList,
     $loginForm,
     $signupForm,
+    // $storyForm,
+    // $favoritesForm,
   ];
   components.forEach(c => c.hide());
 }
