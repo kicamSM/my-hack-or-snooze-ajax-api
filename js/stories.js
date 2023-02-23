@@ -73,23 +73,29 @@ function putStoriesOnPage() {
     // notFavorite ? IAmFavorite : notFavorite
 // I think I should be able to use a conditional ternaary operator here but it is not working
 
+//this one works for filling star
     if(target.hasAttribute="fa fa-star-o" ) {
      target.setAttribute('class', 'fa fa-star star');
-     $allStoriesList.on('click', '.star', clickStarAgain);
-     }
+    }
+  })
+}
+
+//ternary operator
+
     //  console.log(target)
     //  console.log(target.className)
-    }) }
       //   else {
       // // target.animVal = 'svg-inline--fa fa-star-o fa-w-18 star'; 
       // console.log(target.className)
 
-      function clickStarAgain(e){
-          if(e.target.hasAttribute="fa fa-star") {
-   e.target.setAttribute('class', 'fa fa-star-o');
-   console.log(e.target.className)
-    }
-  }
+  //     function clickStarAgain(e){
+  //         if(e.target.hasAttribute="fa fa-star") {
+  //  e.target.setAttribute('class', 'fa fa-star-o');
+  //  console.log(e.target.className)
+  //   }
+  // }
+
+
   
 
   
