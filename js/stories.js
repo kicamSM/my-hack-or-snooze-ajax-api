@@ -22,10 +22,15 @@ async function getAndShowStoriesOnStart() {
 function generateStoryMarkup(story) {
   // console.debug("generateStoryMarkup", story);
 
+  // <span class='star fa fa-star-o'></span>
+  // was using this one zarko told me to use 
+
   const hostName = story.getHostName();
   return $(`
       <li id="${story.storyId}">
-      <span class='star fa fa-star-o'></span>
+      <span class="star">
+      <i class="far fa-star"></i>
+      </span>
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
@@ -61,8 +66,8 @@ function putStoriesOnPage() {
   // e.preventDefault()
   // console.log('you clicked the star') } )
 
-  $allStoriesList.on('click', '.star', function (e) {
-    let target = e.target
+  // $allStoriesList.on('click', '.star', function (e) {
+  //   const $target = $(e.target)
     // console.log(target.className)
     // console.log(target.hasAttribute="fa fa-star-o")
 
@@ -73,12 +78,41 @@ function putStoriesOnPage() {
     // notFavorite ? IAmFavorite : notFavorite
 // I think I should be able to use a conditional ternaary operator here but it is not working
 
-//this one works for filling star
-    if(target.hasAttribute="fa fa-star-o" ) {
-     target.setAttribute('class', 'fa fa-star star');
-    }
+$allStoriesList.on('click', '.star', function (e) {
+
+  const $tgt = $(e.target);
+  
+  console.log($tgt);
+  // see if the item is already favorited (checking by presence of star)
+  if ($tgt.hasClass("fas")) {
+  // currently a favorite: remove from user's fav list and change star
+  $tgt.closest("i").toggleClass("fas far");
+  } else {
+  // currently not a favorite: do the opposite
+  $tgt.closest("i").toggleClass("fas far");
+  }
+  
+  
   })
 }
+// if($target.hasClass('fas') ) {
+//   $target.closest("i").toggleClass("fas far"); 
+//  }
+//  else {
+//   $target.closest("i").toggleClass("fas far");
+//  }
+
+// })
+// }
+
+
+
+//this one works for filling star
+//     if(target.hasAttribute="fa fa-star-o" ) {
+//      target.setAttribute('class', 'fa fa-star star');
+//     }
+//   })
+// }
 
 //ternary operator
 
