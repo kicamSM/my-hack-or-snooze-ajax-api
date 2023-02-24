@@ -57,26 +57,7 @@ function putStoriesOnPage() {
   $allStoriesList.show();
   $storyForm.addClass("hidden")
 
-  // const $favoritesStar = $('[class="star"]')
-  //not doing jquery is not working here. Going back to vanilla Javascript for now. 
 
-//  let star = document.querySelectorAll("[class='star']");
-
-  // $favoritesStar.on("click", function(e) {
-  // e.preventDefault()
-  // console.log('you clicked the star') } )
-
-  // $allStoriesList.on('click', '.star', function (e) {
-  //   const $target = $(e.target)
-    // console.log(target.className)
-    // console.log(target.hasAttribute="fa fa-star-o")
-
-
-    // let IAmFavorite = target.setAttribute('class', 'fa fa-star');
-    // let notFavorite = target.setAttribute('class', 'fa fa-star-o');
-
-    // notFavorite ? IAmFavorite : notFavorite
-// I think I should be able to use a conditional ternaary operator here but it is not working
 
 $allStoriesList.on('click', '.star', function (e) {
 
@@ -95,97 +76,48 @@ $allStoriesList.on('click', '.star', function (e) {
   
   })
 }
-// if($target.hasClass('fas') ) {
-//   $target.closest("i").toggleClass("fas far"); 
-//  }
-//  else {
-//   $target.closest("i").toggleClass("fas far");
-//  }
-
-// })
-// }
 
 
+// async function addNewStories(evt) {
 
-//this one works for filling star
-//     if(target.hasAttribute="fa fa-star-o" ) {
-//      target.setAttribute('class', 'fa fa-star star');
-//     }
-//   })
-// }
+  // const author = $authorInput.val();
+  // const title = $storyInput.val();
+  // const url = $urlInput.val();
 
-//ternary operator
+  // const username = currentUser;
 
-    //  console.log(target)
-    //  console.log(target.className)
-      //   else {
-      // // target.animVal = 'svg-inline--fa fa-star-o fa-w-18 star'; 
-      // console.log(target.className)
-
-  //     function clickStarAgain(e){
-  //         if(e.target.hasAttribute="fa fa-star") {
-  //  e.target.setAttribute('class', 'fa fa-star-o');
-  //  console.log(e.target.className)
-  //   }
-  // }
-
-
-  
-
-  
-
-    // else {
-    //   target.setAttribute('class', 'fa fa-star-o');
-    //   console.log(target)
-    //    }
-  //   else if(target.hasAttribute="fa fa-star") {
-  //  target.setAttribute('class', 'fa fa-star-o');
-  //  console.log(target)
-  //   }
-
-
-    // else() => target.setAttribute('class', 'fa fa-star-o');
-    
-
-
-
-
-    //this is how you set a class for an svg element 
-
-    // favorite.replace("svg-inline--fa', 'fa-star', 'fa-w-18', 'star', value: 'svg-inline--fa fa-star fa-w-18 star'", "fa-star', value: 'fa-star'")
-
-    // favorite.addClass('fa fa-star');
-
-    // console.log(e.target.className)
-    // console.log(target.hasAttribute="fa fa-star-o")
-    // })
-
-  // star.addEventListener("click", function(e) {
-  //   e.preventDefault()
-  //   console.log('you clicked the star')})
-
-
-// document.querySelector('.star').addEventListener("click", function(e){console.log('click')})
-
-  // note this has to go here because of order of operations. The class was not run yet. So the class was coming back as null.
-
-function addNewStories(evt) {
-
-  const author = $authorInput.val();
-  const title = $storyInput.val();
-  const url = $urlInput.val();
-
-  const username = currentUser;
-
-   let story = storyList.addStory(username, { title: title, author: author, url: url })
-   console.log(story)
+  //  let story = storyList.addStory(username, { title: title, author: author, url: url })
+  //  console.log(story)
   // note that when I have the evt.preventDefault() this works  but only when you refresh the page. If the evt.preventDefault() is not there, 
    // take this information and pass it to the function or method which allows it to be appended to the page. 
 
-  let storyMockup = generateStoryMarkup(story);
-  // putStoriesOnPage(story);
-    $allStoriesList.prepend(storyMockup);
-    $storyForm.addClass("hidden")
+   async function submitNewStory(evt) {
+    console.debug("submitNewStory");
+    evt.preventDefault();
+    // grab all info from form
+    const title = $("#create-title").val();
+    console.log(title)
+    const url = $("#create-url").val();
+    console.log(url)
+    const author = $("#create-author").val();
+    console.log(author)
+    const username = currentUser.username
+    const storyData = {title, url, author, username };
+  
+    const story = await storyList.addStory(currentUser, storyData);
+  
+    const $story = generateStoryMarkup(story);
+    $allStoriesList.prepend($story);
+
+    //this is still not working 
+
+  // let storyMockup = generateStoryMarkup(story);
+  // // putStoriesOnPage(story);
+  //   $allStoriesList.prepend(storyMockup);
+  //   $storyForm.addClass("hidden")
     // console.log($allStoriesList)
+    $storyForm.slideUp("slow");
+    $storyForm.trigger("reset");
+  
 }
-// $submitBtn.on("submit", addNewStories)
+$storyForm.on("submit", addNewStories)

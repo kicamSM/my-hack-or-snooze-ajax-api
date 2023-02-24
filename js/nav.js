@@ -45,8 +45,10 @@ $submitBtn.on("click", navAddStory);
 // console.log($submitBtn)
 
 function navAddStory(evt) {
+  console.debug("navAddStory", evt);
+$allStoriesList.show()
   evt.preventDefault();
-console.debug("navAddStory", evt);
+$storyForm.show();
 // addNewStories();
 
 }
