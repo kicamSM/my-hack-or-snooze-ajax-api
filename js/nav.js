@@ -49,9 +49,20 @@ function navAddStory(evt) {
 $allStoriesList.show()
   evt.preventDefault();
 $storyForm.show();
+submitNewStory();
 // addNewStories();
 
 }
+
+// function navSubmitStoryClick(evt) {
+//   console.debug("navSubmitStoryClick", evt);
+//   hidePageComponents();
+//   $allStoriesList.show();
+//   $submitForm.show();
+// }
+
+// $navSubmitStory.on("click", navSubmitStoryClick);
+// just added thiss function 
 
 $navSubmit.on("click", unhideStoryClass);
 

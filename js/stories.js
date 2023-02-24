@@ -93,7 +93,7 @@ $allStoriesList.on('click', '.star', function (e) {
 
    async function submitNewStory(evt) {
     console.debug("submitNewStory");
-    evt.preventDefault();
+    // evt.preventDefault();
     // grab all info from form
     const title = $("#create-title").val();
     console.log(title)
@@ -120,4 +120,4 @@ $allStoriesList.on('click', '.star', function (e) {
     $storyForm.trigger("reset");
   
 }
-$storyForm.on("submit", addNewStories)
+$storyForm.on("submit", submitNewStory)
