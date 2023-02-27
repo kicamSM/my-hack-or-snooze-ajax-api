@@ -213,15 +213,31 @@ class User {
 
 
   async addFavorites(e) {
-    console.log(e.target)
- 
+    // console.log(e.target)
+
     const favoriteElement = e.target.closest('ol li');
-    console.log(favoriteElement)
-    const cloneFavoriteElement = favoriteElement.cloneNode()
-    console.log(cloneFavoriteElement)
+      favoriteElement.setAttribute('class', 'favorite');
+      console.log(favoriteElement) 
+
+    if(!favoriteElement.classList.contains('.favorite')) {
+    // favoriteElement.setAttribute('class', 'favorite'); 
+    // console.log(favoriteElement)
+    const cloneFavoriteElement = favoriteElement.cloneNode(true);
+    // console.log(cloneFavoriteElement);
    
     $allFavoritesList.prepend(cloneFavoriteElement);
+
+    } else {
+      console.log('you have a class of favorite')
+      favoriteElement.removeAttribute('class', 'favorite'); 
+      console.log(favoriteElement)
+      favoriteElement.remove();
+      console.log($allFavoritesList)
+      
+  
+
+    }
     // so it appears as prepnding an element automatically removes it from the list 
-    console.log($allFavoritesList);
+    // console.log($allFavoritesList);
   }
 }
