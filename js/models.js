@@ -210,4 +210,18 @@ class User {
       return null;
     }
   }
+
+  //note this function is not actually running on click of star 
+
+  static async addFavorites(e) {
+    console.log(e.target)
+    //this function is not running 
+    const $favoriteElement = $e.target.closest('ol li');
+    //note this is clicking on the class of star not actually on the element iteslf. You need to get the element that is associated with that class. 
+    // console.log($favoriteElement);
+
+    // need to get back the current user and the story data 
+    $allFavoritesList.prepend($favoriteElement);
+    console.log($allFavoritesList)
+  }
 }

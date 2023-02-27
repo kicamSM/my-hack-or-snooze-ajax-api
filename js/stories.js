@@ -61,18 +61,27 @@ function putStoriesOnPage() {
 
 $allStoriesList.on('click', '.star', function (e) {
 
-  const $tgt = $(e.target);
+  const $target = $(e.target);
   
-  console.log($tgt);
+  // console.log($target);
   // see if the item is already favorited (checking by presence of star)
-  if ($tgt.hasClass("fas")) {
+  if ($target.hasClass("fas")) {
   // currently a favorite: remove from user's fav list and change star
-  $tgt.closest("i").toggleClass("fas far");
+
+  //note that add facorites gives error up which says its not defined so add favorites function might be in the wrong place in the js file???? 
+  
+  // addFavorites(); 
+  $target.closest("i").toggleClass("fas far");
   } else {
   // currently not a favorite: do the opposite
-  $tgt.closest("i").toggleClass("fas far");
+
+  // TODO NEED TO ADD TO FAVORITES LIST 
+  // questions for self is there a function that does this yet?? IF not where does it need to be lcoated?? Order of operations 
+  // directions say that they need to be defined in user class --this is in the models.js 
+  $target.closest("i").toggleClass("fas far");
+  addFavorites(); 
   }
-  
+  // addFavorites();
   
   })
 }
@@ -95,16 +104,27 @@ $allStoriesList.on('click', '.star', function (e) {
     console.debug("submitNewStory");
     // evt.preventDefault();
     // grab all info from form
-    const title = $("#create-title").val();
-    console.log(title)
-    const url = $("#create-url").val();
-    console.log(url)
-    const author = $("#create-author").val();
-    console.log(author)
-    const username = currentUser.username
+    // const title = $("#create-title").val();
+    // console.log(title)
+    // const url = $("#create-url").val();
+    // console.log(url)
+    // const author = $("#create-author").val();
+    // console.log(author)
+    const author = $authorInput.val();
+    const title = $storyInput.val();
+    const url = $urlInput.val();
+    const username = currentUser
+    // const username = currentUser.username
+    //note that this doesnt matter at least for this step. It could matter later on but not seeing any difference for now. 
     const storyData = {title, url, author, username };
+    console.log(storyData)
+
+      // let oldStory = storyList.addStory(username, { title: title, author: author, url: url })
+      // console.log(oldStory)
+      //review this with Mentor --- this is returning more than simply the data. Follow up and see if you can figure out how to return data from this
   
     const story = await storyList.addStory(currentUser, storyData);
+    // console.log(storyList)
   
     const $story = generateStoryMarkup(story);
     $allStoriesList.prepend($story);
@@ -117,7 +137,10 @@ $allStoriesList.on('click', '.star', function (e) {
   //   $storyForm.addClass("hidden")
     // console.log($allStoriesList)
     $storyForm.slideUp("slow");
+    //this is simply an effect on the form to make it disappear in the way they want 
     $storyForm.trigger("reset");
+    //this is reseting the form when you fill it out
+
   
 }
 $storyForm.on("submit", submitNewStory)
