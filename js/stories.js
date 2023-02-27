@@ -79,7 +79,7 @@ $allStoriesList.on('click', '.star', function (e) {
   // questions for self is there a function that does this yet?? IF not where does it need to be lcoated?? Order of operations 
   // directions say that they need to be defined in user class --this is in the models.js 
   $target.closest("i").toggleClass("fas far");
-  addFavorites(); 
+  currentUser.addFavorites(e); 
   }
   // addFavorites();
   
