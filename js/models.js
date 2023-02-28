@@ -212,9 +212,9 @@ class User {
   }
 
 
-  async addFavorites(e) {
+  async addFavorites(story) {
     // console.log(e.target)
-
+// console.log('you are running addFavorites funtion')
     // const favoriteElement = e.target.closest('ol li');
     //   // favoriteElement.setAttribute('class', 'favorite');
     //   // console.log(favoriteElement) 
@@ -229,7 +229,9 @@ class User {
 
   // the problem with doing the way I thought of before would be that you would have to figure out a way to associate the cloned item from the origin because you are clicking the original and wanting to remove the clone. Its easier push the story into the favorites that are already set up 
     this.favorites.push(story);
-    await this._addOrRemoveFavorite("add", story);
+    // console.log(this.favorites)
+    // this is adding the favorites attached to the user. 
+    await this.addOrRemove('add', story);
 
 
   //   } else {
@@ -244,5 +246,29 @@ class User {
   //   // so it appears as prepnding an element automatically removes it from the list 
   //   // console.log($allFavoritesList);
   // }
+}
+
+async removeFavorites(story) {
+ this.favorites = this.favorites.filter(s => s.storyId !== story.storyId)
+ // here we are saying lets filter out all of the stories in the favorites that are not equal to the story with the id that was passed into the function 
+
+
+
+ await this.addOrRemove('remove', story);
+}
+
+async addOrRemove(doAction, story) {
+  const method = doAction === 'add' ? 'POST' : 'DELETE';
+  //this is just saying that we are are doing oen thing based on weather or not we are adding the favorite and if not then we are removing the favorite. 
+  const token = this.loginToken;
+  //use this instance of the logintoken
+  await axios({
+    url: `${BASE_URL}/users/${this.username}/favorites/${story.storyId}`,
+    method: method,
+    data: { token },
+  }); 
+
+  // console.log(this.favorites)
+  // adding or removing information from favorites on this user. Grabbing the story information through the id. Must have a method, i.e. add or remove 
 }
 }

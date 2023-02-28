@@ -64,33 +64,53 @@ function putStoriesOnPage() {
   const $target = $(e.target);
   const $closestLi = $target.closest('li')
   const storyId = $closestLi.attr("id");
-  console.log(storyId)
+  // console.log(storyId)
   const story = storyList.stories.find(s => s.storyId === storyId);
-  console.log(storyList) 
+  // console.log(storyList) 
   //storyList is an object with an array 
-  console.log(storyList.stories)
+  // console.log(storyList.stories)
  //stories is the array inside the object 
   //function find is locating the story by the id 
   //in this object function find(s) { the id of that funtion my story === another story id (i.e same story)  //stories is the array inside the object 
 //what I don't understand is why the id is able to pull out all the story information. That must have to do with a funtion of the API.
-  console.log($target.closest('li').val())
   // see if the item is already favorited (checking by resence of star)
   if ($target.hasClass("fas")) {
   // currently a favorite: remove from user's fav list and change star
    
   $target.closest("i").toggleClass("fas far");
+  currentUser.removeFavorites(story)
   } else {
   // currently not a favorite: do the opposite
 
   // TODO NEED TO ADD TO FAVORITES LIST 
   $target.closest("i").toggleClass("fas far");
   currentUser.addFavorites(story); 
-  console.log(story)
+  // console.log(story)
   //will need to look into this one 
   }
   })
 }
 
+$navFavorites.on('click', putFavoritesOnPage)
+
+function putFavoritesOnPage() {
+  $allFavoritesList.empty();
+  const $favsToAppend = currentUser.favorites;
+  console.log($favsToAppend.length)
+
+  if($favsToAppend == 0) {
+    return $(`<li>${'No favorites added yet!'}</li>`)
+  }
+
+  for(let story of currentUser.favorites) {
+    const $story = generateStoryMarkup(story);
+    $allFavoritesList.append($story)
+  }
+
+  // $allFavoritesList.append($favsToAppend);
+  // console.log($allFavoritesList)
+  // note that you can follow what the format of the previous function putStoriesOnPage()
+}
 
 // async function addNewStories(evt) {
 
@@ -104,6 +124,8 @@ function putStoriesOnPage() {
   //  console.log(story)
   // note that when I have the evt.preventDefault() this works  but only when you refresh the page. If the evt.preventDefault() is not there, 
    // take this information and pass it to the function or method which allows it to be appended to the page. 
+
+
 
    async function submitNewStory(evt) {
     console.debug("submitNewStory");
