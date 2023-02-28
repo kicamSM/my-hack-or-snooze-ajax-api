@@ -215,29 +215,34 @@ class User {
   async addFavorites(e) {
     // console.log(e.target)
 
-    const favoriteElement = e.target.closest('ol li');
-      favoriteElement.setAttribute('class', 'favorite');
-      console.log(favoriteElement) 
+    // const favoriteElement = e.target.closest('ol li');
+    //   // favoriteElement.setAttribute('class', 'favorite');
+    //   // console.log(favoriteElement) 
 
-    if(!favoriteElement.classList.contains('.favorite')) {
-    // favoriteElement.setAttribute('class', 'favorite'); 
-    // console.log(favoriteElement)
-    const cloneFavoriteElement = favoriteElement.cloneNode(true);
-    // console.log(cloneFavoriteElement);
+    // if(!favoriteElement.classList.contains('favorite')) {
+    // // favoriteElement.setAttribute('class', 'favorite'); 
+    // // console.log(favoriteElement)
+    // const cloneFavoriteElement = favoriteElement.cloneNode(true);
+    // // console.log(cloneFavoriteElement);
    
-    $allFavoritesList.prepend(cloneFavoriteElement);
+    // $allFavoritesList.prepend(cloneFavoriteElement);
 
-    } else {
-      console.log('you have a class of favorite')
-      favoriteElement.removeAttribute('class', 'favorite'); 
-      console.log(favoriteElement)
-      favoriteElement.remove();
-      console.log($allFavoritesList)
+  // the problem with doing the way I thought of before would be that you would have to figure out a way to associate the cloned item from the origin because you are clicking the original and wanting to remove the clone. Its easier push the story into the favorites that are already set up 
+    this.favorites.push(story);
+    await this._addOrRemoveFavorite("add", story);
+
+
+  //   } else {
+  //     favoriteElement.removeAttribute('class', 'favorite'); 
+  //     console.log(favoriteElement)
+  //     $allFavoritesList
+  //     console.log($allFavoritesList)
       
   
 
-    }
-    // so it appears as prepnding an element automatically removes it from the list 
-    // console.log($allFavoritesList);
-  }
+  //   }
+  //   // so it appears as prepnding an element automatically removes it from the list 
+  //   // console.log($allFavoritesList);
+  // }
+}
 }

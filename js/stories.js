@@ -59,30 +59,35 @@ function putStoriesOnPage() {
 
 
 
-$allStoriesList.on('click', '.star', function (e) {
-
+ $allStoriesList.on('click', '.star', function (e) {
+//you need this function to connect the entirety of the story information when  clicking on the star 
   const $target = $(e.target);
-  
-  // console.log($target);
-  // see if the item is already favorited (checking by presence of star)
+  const $closestLi = $target.closest('li')
+  const storyId = $closestLi.attr("id");
+  console.log(storyId)
+  const story = storyList.stories.find(s => s.storyId === storyId);
+  console.log(storyList) 
+  //storyList is an object with an array 
+  console.log(storyList.stories)
+ //stories is the array inside the object 
+  //function find is locating the story by the id 
+  //in this object function find(s) { the id of that funtion my story === another story id (i.e same story)  //stories is the array inside the object 
+//what I don't understand is why the id is able to pull out all the story information. That must have to do with a funtion of the API.
+  console.log($target.closest('li').val())
+  // see if the item is already favorited (checking by resence of star)
   if ($target.hasClass("fas")) {
   // currently a favorite: remove from user's fav list and change star
-
-  //note that add facorites gives error up which says its not defined so add favorites function might be in the wrong place in the js file???? 
-  
-  // addFavorites(); 
+   
   $target.closest("i").toggleClass("fas far");
   } else {
   // currently not a favorite: do the opposite
 
   // TODO NEED TO ADD TO FAVORITES LIST 
-  // questions for self is there a function that does this yet?? IF not where does it need to be lcoated?? Order of operations 
-  // directions say that they need to be defined in user class --this is in the models.js 
   $target.closest("i").toggleClass("fas far");
-  currentUser.addFavorites(e); 
+  currentUser.addFavorites(story); 
+  console.log(story)
+  //will need to look into this one 
   }
-  // addFavorites();
-  
   })
 }
 
