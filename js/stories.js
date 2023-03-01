@@ -33,23 +33,20 @@ function generateStoryMarkup(story) {
   // console.log(showStar)
   const favs = currentUser.favorites 
   let isFavorite = false 
-  favs.forEach(findIdMatch)
-// better function to use would be filter. 
-// favs.filter(findIdMatch);
+ 
+favs.filter(findIdMatch);
 
   function findIdMatch(fav) {
-    console.log('findIdMatch is running', fav.storyId)
     if(story.storyId === fav.storyId) {
       isFavorite = true 
     }
   }
-//   if(story of currentStories) 
 
   const hostName = story.getHostName();
   return $(`
       <li id="${story.storyId}">
       <span class="star">
-      <i class=${isFavorite ? "fa-star" : "fa-star-o"}></i>
+      <i class="${isFavorite ? "fas" : "far"} fa-star"></i>
       </span>
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
@@ -57,6 +54,9 @@ function generateStoryMarkup(story) {
         <small class="story-hostname">(${hostName})</small>
         <small class="story-author">by ${story.author}</small>
         <small class="story-user">posted by ${story.username}</small>
+      </li>
+      <li class="button">
+      <button>Delete Story</button>
       </li>
     `);
 }
@@ -79,37 +79,39 @@ function putStoriesOnPage() {
 
 
 
- $allStoriesList.on('click', '.star', function (e) {
-//you need this function to connect the entirety of the story information when  clicking on the star 
-  const $target = $(e.target);
-  const $closestLi = $target.closest('li')
-  const storyId = $closestLi.attr("id");
-  // console.log(storyId)
-  const story = storyList.stories.find(s => s.storyId === storyId);
-  // console.log(storyList) 
-  //storyList is an object with an array 
-  // console.log(storyList.stories)
- //stories is the array inside the object 
-  //function find is locating the story by the id 
-  //in this object function find(s) { the id of that funtion my story === another story id (i.e same story)  //stories is the array inside the object 
-//what I don't understand is why the id is able to pull out all the story information. That must have to do with a funtion of the API.
-  // see if the item is already favorited (checking by resence of star)
-  if ($target.hasClass("fas")) {
-  // currently a favorite: remove from user's fav list and change star
-   
-  $target.closest("i").toggleClass("fas far");
-  currentUser.removeFavorites(story)
-  } else {
-  // currently not a favorite: do the opposite
-
-  // TODO NEED TO ADD TO FAVORITES LIST 
-  $target.closest("i").toggleClass("fas far");
-  currentUser.addFavorites(story); 
-  // console.log(story)
-  //will need to look into this one 
-  }
-  })
 }
+
+
+$allStoriesList.on('click', '.star', function (e) {
+  //you need this function to connect the entirety of the story information when  clicking on the star 
+    const $target = $(e.target);
+    const $closestLi = $target.closest('li')
+    const storyId = $closestLi.attr("id");
+    // console.log(storyId)
+    const story = storyList.stories.find(s => s.storyId === storyId);
+    // console.log(storyList) 
+    //storyList is an object with an array 
+    // console.log(storyList.stories)
+   //stories is the array inside the object 
+    //function find is locating the story by the id 
+    //in this object function find(s) { the id of that funtion my story === another story id (i.e same story)  //stories is the array inside the object 
+  //what I don't understand is why the id is able to pull out all the story information. That must have to do with a funtion of the API.
+    // see if the item is already favorited (checking by resence of star)
+    if ($target.hasClass("fas")) {
+    // currently a favorite: remove from user's fav list and change star
+     
+    $target.closest("i").toggleClass("fas far");
+    currentUser.removeFavorites(story)
+    } else {
+    // currently not a favorite: do the opposite
+  
+    // TODO NEED TO ADD TO FAVORITES LIST 
+    $target.closest("i").toggleClass("fas far");
+    currentUser.addFavorites(story); 
+    // console.log(story)
+    //will need to look into this one 
+    }
+    })
 
 $navFavorites.on('click', putFavoritesOnPage)
 
@@ -132,7 +134,24 @@ function putFavoritesOnPage() {
   // console.log($allFavoritesList)
   // note that you can follow what the format of the previous function putStoriesOnPage()
 }
+// console.log($button)
+// $button.on('click', deleteStory);
 
+// function deleteStory() {
+// console.log('you clicked delete')
+// }
+
+
+// $button.on('click', '.button', function () {
+//   console.log('you clicked delete')
+// })
+
+const btn = document.getElementsByClassName('button');
+btn.addEventListener('click', deleteStory)
+
+function deleteStory() {
+console.log('you clicked delete')
+}
 // async function addNewStories(evt) {
 
   // const author = $authorInput.val();
