@@ -251,9 +251,6 @@ class User {
 async removeFavorites(story) {
  this.favorites = this.favorites.filter(s => s.storyId !== story.storyId)
  // here we are saying lets filter out all of the stories in the favorites that are not equal to the story with the id that was passed into the function 
-
-
-
  await this.addOrRemove('remove', story);
 }
 

@@ -23,13 +23,33 @@ function generateStoryMarkup(story) {
   // console.debug("generateStoryMarkup", story);
 
   // <span class='star fa fa-star-o'></span>
-  // was using this one zarko told me to use 
+  // was using this one zarko told me to use
+  // the qustion becomes how do you access the current story that is being appended to the dom? 
+  // console.log(currentUser.favorites)
+  // console.log(story.storyId)
+  // console.log(currentUser.isFavorite)
+  // let currentStories = currentUser.favorites
+
+  // console.log(showStar)
+  const favs = currentUser.favorites 
+  let isFavorite = false 
+  favs.forEach(findIdMatch)
+// better function to use would be filter. 
+// favs.filter(findIdMatch);
+
+  function findIdMatch(fav) {
+    console.log('findIdMatch is running', fav.storyId)
+    if(story.storyId === fav.storyId) {
+      isFavorite = true 
+    }
+  }
+//   if(story of currentStories) 
 
   const hostName = story.getHostName();
   return $(`
       <li id="${story.storyId}">
       <span class="star">
-      <i class="far fa-star"></i>
+      <i class=${isFavorite ? "fa-star" : "fa-star-o"}></i>
       </span>
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
@@ -99,12 +119,13 @@ function putFavoritesOnPage() {
   console.log($favsToAppend.length)
 
   if($favsToAppend == 0) {
-    return $(`<li>${'No favorites added yet!'}</li>`)
+    const noFavs = $(`<li>${'No favorites added yet!'}</li>`)
+    $allFavoritesList.append(noFavs)
   }
 
   for(let story of currentUser.favorites) {
     const $story = generateStoryMarkup(story);
-    $allFavoritesList.append($story)
+    $allFavoritesList.append($story);
   }
 
   // $allFavoritesList.append($favsToAppend);
