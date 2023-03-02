@@ -195,12 +195,31 @@ function deleteStory(e){
   const $target = $(e.target);
   const $closestLi = $target.closest('li')
   const storyIdToDelete = $closestLi.attr("id");
-  const story = storyList.stories.find(s => s.storyId === storyIdToDelete);
+
+
+  const storyInMain = storyList.stories.find(s => s.storyId === storyIdToDelete);
+  const storyInOwnStories = currentUser.ownStories.find(s => s.storyId === storyIdToDelete);
+  //this is the story we need to delete from the allStoriesList 
   // console.log(story.indexOf())
   // console.log(story)
   // console.log(storyList.stories)
-  currentUser.removeUserStoryFromDom(story);
+  // console.log('$allStoriesList:', $allStoriesList)
+  // console.log('indexOfStory:', storyList.stories.indexOf(story))
+  // const idxStoryRemoved = storyList.stories.indexOf(story);
+  currentUser.removeUserStoryFromStoriesList(storyInMain);
+  currentUser.removeUserStoryFromOwnStories(storyInOwnStories)
+  $closestLi.remove();
+  // storyList.stories.splice(idxStoryRemoved, 1)
+  // putStoriesOnPage();
+  // console.log($allStoriesList)
+  // $allStoriesList.remove(idxStoryRemoved)
+  // console.log(story.closest('li')) doesnt work 
 
+
+  //note this removed it from the my stories tab but did not remove it from the allStoriesList
+
+
+  
   //this is not defined according to the console. But this method is inside a class so that is not how you would call it.
   // look into this more. You might not be able to simply call this function
   if($target.hasClass('fa fa-trash')) {
@@ -217,12 +236,9 @@ function deleteStory(e){
   // console.log("closestLi:", $closestLi)
   // console.log($target)
   // console.log(currentUser)
-  deleteStoryFromDom(); 
+
 }
 
-function deleteStoryFromDom() {
-  console.log('removeStoryFromDom is running')
-}
 
 // async function addNewStories(evt) {
 

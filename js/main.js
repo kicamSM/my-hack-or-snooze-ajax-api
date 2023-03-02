@@ -17,6 +17,7 @@ const $navLogOut = $("#nav-logout");
 const $storyForm = $('#story-form')
 const $navSubmit = $('#nav-submit')
 const $submitBtn = $("#submitBtn"); 
+const $submitForm = $('submit-form')
 const $authorInput = $("#author-input");
 const $storyInput = $("#story-input");
 const $urlInput = $("#url-input");

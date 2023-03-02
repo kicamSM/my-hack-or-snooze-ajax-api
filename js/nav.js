@@ -42,15 +42,16 @@ function updateNavOnLogin() {
 // const submitBtn = document.getElementById('submitBtn')
 // console.log(submitBtn)
 // submitBtn.on('click', navAddStory);
-$submitBtn.on("click", navAddStory);
+$submitForm.on("click", navAddStory);
 // console.log($submitBtn)
 
 function navAddStory(evt) {
   console.debug("navAddStory", evt);
-$allStoriesList.show()
   evt.preventDefault();
-$storyForm.show();
+$allStoriesList.show()
+$myStoriesForm.addClass("hidden");
 submitNewStory();
+// note that you need to figure out a way to get rid of the myStoriesLi which is staying appended on on click for some reason
 // addNewStories();
 
 }
@@ -78,6 +79,7 @@ function unhideFavorites() {
   $favoritesForm.removeClass("hidden");
   $storyForm.addClass("hidden");
   $myStoriesForm.addClass("hidden");
+  $submitForm.addClass("hidden");
   hidePageComponents()
   // console.log('you clicked favorites')
 }
