@@ -23,8 +23,11 @@ const $urlInput = $("#url-input");
 
 const $navFavorites = $('#nav-favorites')
 const $favoritesForm = $('#favorites-form')
-const $navMyStories = $('#nav-my-stories')
 const $allFavoritesList = $('#all-favorites-list')
+
+const $navMyStories = $('#nav-my-stories')
+const $myStoriesForm = $('#my-stories-form')
+const $myStoriesList  = $('#my-stories-list');
 const $button = $('.button')
 // const $favoritesStar = $('.fa-star')
 /** To make it easier for individual components to show just themselves, this

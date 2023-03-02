@@ -91,8 +91,12 @@ class StoryList {
     const story = new Story(response.data.story);
     this.stories.unshift(story);
     user.ownStories.unshift(story);
+   console.log("user.ownStories:", user.ownStories)
 console.log(story)
+putOwnStoriesOnPage(story);
+//note I am not sure whether this should be here or not
     return story;
+
   }
 }
 
@@ -250,7 +254,8 @@ class User {
 
 async removeFavorites(story) {
  this.favorites = this.favorites.filter(s => s.storyId !== story.storyId)
- // here we are saying lets filter out all of the stories in the favorites that are not equal to the story with the id that was passed into the function 
+//  console.log('currentUser:', currentUser)
+
  await this.addOrRemove('remove', story);
 }
 
@@ -265,7 +270,27 @@ async addOrRemove(doAction, story) {
     data: { token },
   }); 
 
+  console.log('currentUser.favorites:', currentUser.favorites)
+
   // console.log(this.favorites)
   // adding or removing information from favorites on this user. Grabbing the story information through the id. Must have a method, i.e. add or remove 
 }
+
+async removeUserStoryFromDom(story) {
+  // console.log(currentUser.ownStories)
+  
+  // console.log(story.storyId)
+  // console.log('removeUserStoryFromDom is running')
+  const token = this.loginToken;
+  //use this instance of the logintoken
+  await axios({
+    url: `${BASE_URL}/stories/${story.storyId}`,
+    method: 'DELETE',
+    data: { token },
+  }); 
+  console.log('storyList.stories:', storyList.stories)
+
+}
+
+
 }

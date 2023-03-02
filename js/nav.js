@@ -11,6 +11,7 @@ function navAllStories(evt) {
   hidePageComponents();
   putStoriesOnPage();
   $favoritesForm.addClass("hidden");
+  $myStoriesForm.addClass("hidden");
 }
 
 $body.on("click", "#nav-all", navAllStories);
@@ -76,8 +77,9 @@ $navFavorites.on("click", unhideFavorites);
 function unhideFavorites() {
   $favoritesForm.removeClass("hidden");
   $storyForm.addClass("hidden");
+  $myStoriesForm.addClass("hidden");
   hidePageComponents()
-  console.log('you clicked favorites')
+  // console.log('you clicked favorites')
 }
 // unknow why this is running automatically it should not be 
 
@@ -98,3 +100,13 @@ function unhideFavorites() {
 // } )
 
 // document.querySelector('.fa-star').addEventListener("click", function(e){console.log('click')})
+
+$navMyStories.on("click", unhideMyStories) 
+
+function unhideMyStories() {
+  $myStoriesForm.removeClass("hidden");
+  $storyForm.addClass("hidden");
+  $favoritesForm.addClass("hidden");
+  hidePageComponents();
+
+}

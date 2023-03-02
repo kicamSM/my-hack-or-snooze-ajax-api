@@ -31,6 +31,19 @@ function generateStoryMarkup(story) {
   // let currentStories = currentUser.favorites
 
   // console.log(showStar)
+  const userStories = currentUser.ownStories
+  let isUserStory = false 
+
+  userStories.filter(findUserStory)
+
+  function findUserStory(userStory){
+    if(story.storyId === userStory.storyId) {
+      isUserStory = true
+      // userStory.className = 'trash-can'
+
+    }
+  }
+  
   const favs = currentUser.favorites 
   let isFavorite = false 
  
@@ -54,11 +67,12 @@ favs.filter(findIdMatch);
         <small class="story-hostname">(${hostName})</small>
         <small class="story-author">by ${story.author}</small>
         <small class="story-user">posted by ${story.username}</small>
-      </li>
-      <li class="button">
-      <button>Delete Story</button>
+        <span class="trash-can">
+        <i class="${isUserStory ? "fa fa-trash" : ""}"></i>
+        </span>
       </li>
     `);
+    
 }
 
 /** Gets list of stories from server, generates their HTML, and puts on page. */
@@ -84,6 +98,7 @@ function putStoriesOnPage() {
 
 $allStoriesList.on('click', '.star', function (e) {
   //you need this function to connect the entirety of the story information when  clicking on the star 
+  console.log('currentUser.favorites:', currentUser.favorites)
     const $target = $(e.target);
     const $closestLi = $target.closest('li')
     const storyId = $closestLi.attr("id");
@@ -146,12 +161,69 @@ function putFavoritesOnPage() {
 //   console.log('you clicked delete')
 // })
 
-const btn = document.getElementsByClassName('button');
-btn.addEventListener('click', deleteStory)
+// const btn = document.getElementsByClassName('button');
+// btn.addEventListener('click', deleteStory)
 
-function deleteStory() {
-console.log('you clicked delete')
+// function deleteStory() {
+// console.log('you clicked delete')
+// }
+
+$navMyStories.on("click", putOwnStoriesOnPage);
+
+function putOwnStoriesOnPage() {
+  // console.log('you ran putOwnStoriesOnPage')
+  $myStoriesList.empty();
+  const $userStories = currentUser.ownStories
+
+  if($userStories == 0) {
+    const noMyStories = $(`<li>${'No stories added yet!'}</li>`)
+    $myStoriesList.append(noMyStories)
+  }
+
+  for(let story of currentUser.ownStories) {
+    const $story = generateStoryMarkup(story);
+    $myStoriesList.append($story);
+  }
 }
+
+$myStoriesList.on("click", ".trash-can", deleteStory);
+
+function deleteStory(e){
+  console.log('storyList.stories:', storyList.stories)
+  console.log('you clicked the trashcan')
+  // now you have to remove from both lists that are appended and remove those stories from the dom 
+  const $target = $(e.target);
+  const $closestLi = $target.closest('li')
+  const storyIdToDelete = $closestLi.attr("id");
+  const story = storyList.stories.find(s => s.storyId === storyIdToDelete);
+  // console.log(story.indexOf())
+  // console.log(story)
+  // console.log(storyList.stories)
+  currentUser.removeUserStoryFromDom(story);
+
+  //this is not defined according to the console. But this method is inside a class so that is not how you would call it.
+  // look into this more. You might not be able to simply call this function
+  if($target.hasClass('fa fa-trash')) {
+
+    //then we want to remove that from the list 
+    // document.getElementById
+    // $myStoriesList.removeChild(story)
+    // story.empty()
+    //tried empty and remove 
+  }
+ 
+  // console.log(storyIdToDelete)+
+  // console.log(currentUser.story)
+  // console.log("closestLi:", $closestLi)
+  // console.log($target)
+  // console.log(currentUser)
+  deleteStoryFromDom(); 
+}
+
+function deleteStoryFromDom() {
+  console.log('removeStoryFromDom is running')
+}
+
 // async function addNewStories(evt) {
 
   // const author = $authorInput.val();
