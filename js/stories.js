@@ -58,6 +58,9 @@ favs.filter(findIdMatch);
   const hostName = story.getHostName();
   return $(`
       <li id="${story.storyId}">
+      <span class="trash-can">
+      <i class="${isUserStory ? "fa fa-trash" : ""}"></i>
+      </span>
       <span class="star">
       <i class="${isFavorite ? "fas" : "far"} fa-star"></i>
       </span>
@@ -67,9 +70,6 @@ favs.filter(findIdMatch);
         <small class="story-hostname">(${hostName})</small>
         <small class="story-author">by ${story.author}</small>
         <small class="story-user">posted by ${story.username}</small>
-        <span class="trash-can">
-        <i class="${isUserStory ? "fa fa-trash" : ""}"></i>
-        </span>
       </li>
     `);
     
@@ -90,6 +90,8 @@ function putStoriesOnPage() {
   // console.log($storyForm)
   // console.log(storyList.stories)
   $allStoriesList.show();
+  const $storyMain = $(storyList.stories)
+  console.log($storyMain)
   // $allStoriesList.setAttribute('aria-hidden', "true")
   
 }
