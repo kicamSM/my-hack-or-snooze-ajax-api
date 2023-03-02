@@ -269,46 +269,35 @@ async addOrRemove(doAction, story) {
     method: method,
     data: { token },
   }); 
-
-  console.log('currentUser.favorites:', currentUser.favorites)
-
   // console.log(this.favorites)
   // adding or removing information from favorites on this user. Grabbing the story information through the id. Must have a method, i.e. add or remove 
 }
 
 async removeUserStoryFromStoriesList(storyInMain) {
-  // const storyInMain = storyList.stories.find(s => s.storyId === storyIdToDelete);
   let idxStoryRemoved = storyList.stories.indexOf(storyInMain);
 storyList.stories.splice(idxStoryRemoved, 1);
-
-// console.log(storyInMain)
-
-  // const idxOwnStoryRemoved = currentUser.ownStories.indexOf(story);
-  // console.log(idxOwnStoryRemoved)
-//note that this removes the story from the storyList 
-//still need to remove story from ownstories 
 }
 
-removeUserStoryFromOwnStories(storyInOwnStories) {
+async removeUserStoryFromOwnStories(storyInOwnStories) {
   let idxStoryRemoved = currentUser.ownStories.indexOf(storyInOwnStories);
   currentUser.ownStories.splice(idxStoryRemoved, 1);
+}
 
+async removeUserStoryFromFavoritesList(storyInFavorites) {
+  let idxStoryRemoved = currentUser.favorites.indexOf(storyInFavorites);
+  currentUser.favorites.splice(idxStoryRemoved, 1)
+}
 
+ async removeOwnStoryFromAPI(storyInMain) {
 
-  // console.log(currentUser.ownStories)
-  
-  // console.log(story.storyId)
-  // console.log('removeUserStoryFromDom is running')
-//   const token = this.loginToken;
-//   //use this instance of the logintoken
-//   await axios({
-//     url: `${BASE_URL}/stories/${story.storyId}`,
-//     method: 'DELETE',
-//     data: { token },
-//   }); 
-//   console.log('storyList.stories:', storyList.stories)
-
-// }
+  const token = this.loginToken;
+  //use this instance of the logintoken
+  await axios({
+    url: `${BASE_URL}/stories/${storyInMain.storyId}`,
+    method: 'DELETE',
+    data: { token },
+  }); 
+}
 
 }
-}
+

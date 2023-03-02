@@ -12,9 +12,11 @@ function navAllStories(evt) {
   putStoriesOnPage();
   $favoritesForm.addClass("hidden");
   $myStoriesForm.addClass("hidden");
+  $storyForm.addClass("hidden")
 }
 
 $body.on("click", "#nav-all", navAllStories);
+// this is on click for Hack or Snooze 
 
 /** Show login/signup on click on "login" */
 
@@ -42,19 +44,21 @@ function updateNavOnLogin() {
 // const submitBtn = document.getElementById('submitBtn')
 // console.log(submitBtn)
 // submitBtn.on('click', navAddStory);
-$submitForm.on("click", navAddStory);
-// console.log($submitBtn)
+// $storyForm.on("click", navAddStory);
+// // console.log($submitBtn)
 
-function navAddStory(evt) {
-  console.debug("navAddStory", evt);
-  evt.preventDefault();
-$allStoriesList.show()
-$myStoriesForm.addClass("hidden");
-submitNewStory();
-// note that you need to figure out a way to get rid of the myStoriesLi which is staying appended on on click for some reason
-// addNewStories();
+// function navAddStory(evt) {
+//   console.debug("navAddStory", evt);
+//   // evt.preventDefault();
+// // $submitForm.show();
+// $allStoriesList.show()
+// // $myStoriesForm.addClass("hidden");
+// $myStoriesList.addClass("hidden");
+// submitNewStory();
+// // note that you need to figure out a way to get rid of the myStoriesLi which is staying appended on on click for some reason
+// // addNewStories();
 
-}
+// }
 
 // function navSubmitStoryClick(evt) {
 //   console.debug("navSubmitStoryClick", evt);
@@ -69,19 +73,36 @@ submitNewStory();
 $navSubmit.on("click", unhideStoryClass);
 
 function unhideStoryClass() {
+  console.debug("unhideStoryClass");
+  console.log('unhideStoryClass is running');
   $storyForm.removeClass("hidden");
   $favoritesForm.addClass("hidden");
+  $myStoriesForm.addClass("hidden");
+  $storyForm.show();
+  putStoriesOnPage();
 }
+
+//would like to know more about .show() vs removeClass()
 
 $navFavorites.on("click", unhideFavorites);
 
 function unhideFavorites() {
+  console.debug("unhideFavorites");
   $favoritesForm.removeClass("hidden");
   $storyForm.addClass("hidden");
   $myStoriesForm.addClass("hidden");
-  $submitForm.addClass("hidden");
-  hidePageComponents()
-  // console.log('you clicked favorites')
+  hidePageComponents();
+
+}
+
+$navMyStories.on("click", unhideMyStories) 
+
+function unhideMyStories() {
+  console.debug("unhideMyStories");
+  $myStoriesForm.removeClass("hidden");
+  $storyForm.addClass("hidden");
+  $favoritesForm.addClass("hidden");
+  hidePageComponents();
 }
 // unknow why this is running automatically it should not be 
 
@@ -103,12 +124,3 @@ function unhideFavorites() {
 
 // document.querySelector('.fa-star').addEventListener("click", function(e){console.log('click')})
 
-$navMyStories.on("click", unhideMyStories) 
-
-function unhideMyStories() {
-  $myStoriesForm.removeClass("hidden");
-  $storyForm.addClass("hidden");
-  $favoritesForm.addClass("hidden");
-  hidePageComponents();
-
-}

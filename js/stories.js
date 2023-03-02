@@ -87,12 +87,11 @@ function putStoriesOnPage() {
     const $story = generateStoryMarkup(story);
     $allStoriesList.append($story);
   }
-
+  // console.log($storyForm)
+  // console.log(storyList.stories)
   $allStoriesList.show();
-  $storyForm.addClass("hidden")
-
-
-
+  // $allStoriesList.setAttribute('aria-hidden', "true")
+  
 }
 
 
@@ -189,16 +188,19 @@ function putOwnStoriesOnPage() {
 $myStoriesList.on("click", ".trash-can", deleteStory);
 
 function deleteStory(e){
-  console.log('storyList.stories:', storyList.stories)
-  console.log('you clicked the trashcan')
+  // console.log('storyList.stories:', storyList.stories)
+  // console.log('you clicked the trashcan')
   // now you have to remove from both lists that are appended and remove those stories from the dom 
   const $target = $(e.target);
   const $closestLi = $target.closest('li')
   const storyIdToDelete = $closestLi.attr("id");
-
+  console.log(storyIdToDelete);
 
   const storyInMain = storyList.stories.find(s => s.storyId === storyIdToDelete);
+  
+  console.log('storyInMain:', storyInMain)
   const storyInOwnStories = currentUser.ownStories.find(s => s.storyId === storyIdToDelete);
+  const storyInFavorites =  currentUser.favorites.find(s => s.storyId === storyIdToDelete);
   //this is the story we need to delete from the allStoriesList 
   // console.log(story.indexOf())
   // console.log(story)
@@ -206,9 +208,13 @@ function deleteStory(e){
   // console.log('$allStoriesList:', $allStoriesList)
   // console.log('indexOfStory:', storyList.stories.indexOf(story))
   // const idxStoryRemoved = storyList.stories.indexOf(story);
+  console.log('storyInMain:', storyInMain)
   currentUser.removeUserStoryFromStoriesList(storyInMain);
-  currentUser.removeUserStoryFromOwnStories(storyInOwnStories)
+  currentUser.removeUserStoryFromOwnStories(storyInOwnStories);
+  currentUser.removeUserStoryFromFavoritesList(storyInFavorites)
+  currentUser.removeOwnStoryFromAPI(storyInMain);
   $closestLi.remove();
+  
   // storyList.stories.splice(idxStoryRemoved, 1)
   // putStoriesOnPage();
   // console.log($allStoriesList)
@@ -222,14 +228,6 @@ function deleteStory(e){
   
   //this is not defined according to the console. But this method is inside a class so that is not how you would call it.
   // look into this more. You might not be able to simply call this function
-  if($target.hasClass('fa fa-trash')) {
-
-    //then we want to remove that from the list 
-    // document.getElementById
-    // $myStoriesList.removeChild(story)
-    // story.empty()
-    //tried empty and remove 
-  }
  
   // console.log(storyIdToDelete)+
   // console.log(currentUser.story)

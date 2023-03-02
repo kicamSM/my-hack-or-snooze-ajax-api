@@ -14,13 +14,16 @@ const $navLogin = $("#nav-login");
 const $navUserProfile = $("#nav-user-profile");
 const $navLogOut = $("#nav-logout");
 
-const $storyForm = $('#story-form')
-const $navSubmit = $('#nav-submit')
-const $submitBtn = $("#submitBtn"); 
-const $submitForm = $('submit-form')
+
+const $submitBtn = $("#submitBtn");
+//this is the id of the actual button 
+
 const $authorInput = $("#author-input");
 const $storyInput = $("#story-input");
 const $urlInput = $("#url-input");
+
+const $navSubmit = $('#nav-submit')
+const $storyForm = $('#story-form')
 
 const $navFavorites = $('#nav-favorites')
 const $favoritesForm = $('#favorites-form')
@@ -29,7 +32,8 @@ const $allFavoritesList = $('#all-favorites-list')
 const $navMyStories = $('#nav-my-stories')
 const $myStoriesForm = $('#my-stories-form')
 const $myStoriesList  = $('#my-stories-list');
-const $button = $('.button')
+// const $button = $('.button')
+// note I think button is not being used 
 // const $favoritesStar = $('.fa-star')
 /** To make it easier for individual components to show just themselves, this
  * is a useful function that hides pretty much everything on the page. After
