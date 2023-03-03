@@ -7,9 +7,12 @@ let storyList;
 
 async function getAndShowStoriesOnStart() {
   storyList = await StoryList.getStories();
+  //retreiving stories 
+
   $storiesLoadingMsg.remove();
 
   putStoriesOnPage();
+  //put stories on hack or snooze page
 }
 
 /**
@@ -72,6 +75,7 @@ favs.filter(findIdMatch);
         <small class="story-user">posted by ${story.username}</small>
       </li>
     `);
+    //determining how the story is going to display and whether or not it will have a trash can or a solid star or a outline of a star
     
 }
 
@@ -95,11 +99,27 @@ function putStoriesOnPage() {
   // $allStoriesList.setAttribute('aria-hidden', "true")
   
 }
+// this is putting all stories on page for hack or snooze and is also called for the submit button as the form comes out
+
+
+$allFavoritesList.on('click', '.star', function (e) {
+
+    const $target = $(e.target);
+    const $closestLi = $target.closest('li')
+    const storyId = $closestLi.attr("id");
+
+    const story = storyList.stories.find(s => s.storyId === storyId);
+
+    currentUser.removeFavorites(story)
+    $closestLi.remove();
+    })
+
+  //this function allows user to click on favorites in favorites tab which deletes the  favorite 
 
 
 $allStoriesList.on('click', '.star', function (e) {
   //you need this function to connect the entirety of the story information when  clicking on the star 
-  console.log('currentUser.favorites:', currentUser.favorites)
+  
     const $target = $(e.target);
     const $closestLi = $target.closest('li')
     const storyId = $closestLi.attr("id");
@@ -129,6 +149,8 @@ $allStoriesList.on('click', '.star', function (e) {
     }
     })
 
+    //removes favorites by clicking on star from the main page and submit page 
+
 $navFavorites.on('click', putFavoritesOnPage)
 
 function putFavoritesOnPage() {
@@ -137,7 +159,7 @@ function putFavoritesOnPage() {
   console.log($favsToAppend.length)
 
   if($favsToAppend == 0) {
-    const noFavs = $(`<li>${'No favorites added yet!'}</li>`)
+    const noFavs = $(`<span>${'No favorites added yet!'}</span>`)
     $allFavoritesList.append(noFavs)
   }
 
@@ -150,6 +172,9 @@ function putFavoritesOnPage() {
   // console.log($allFavoritesList)
   // note that you can follow what the format of the previous function putStoriesOnPage()
 }
+
+//puts favorites on favorites page also add no favorites added yet if there are no favorites 
+
 // console.log($button)
 // $button.on('click', deleteStory);
 
@@ -177,7 +202,7 @@ function putOwnStoriesOnPage() {
   const $userStories = currentUser.ownStories
 
   if($userStories == 0) {
-    const noMyStories = $(`<li>${'No stories added yet!'}</li>`)
+    const noMyStories = $(`<span>${'No stories added yet!'}</span>`)
     $myStoriesList.append(noMyStories)
   }
 
@@ -186,6 +211,8 @@ function putOwnStoriesOnPage() {
     $myStoriesList.append($story);
   }
 }
+
+//puts own stories on my stories page or adds not stories added yet 
 
 $myStoriesList.on("click", ".trash-can", deleteStory);
 
@@ -238,7 +265,7 @@ function deleteStory(e){
   // console.log(currentUser)
 
 }
-
+//deletes story from own stories and tabs 
 
 // async function addNewStories(evt) {
 
@@ -298,4 +325,6 @@ function deleteStory(e){
 
   
 }
+
+//on click of submit button submit new story 
 $storyForm.on("submit", submitNewStory)

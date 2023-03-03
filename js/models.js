@@ -85,16 +85,14 @@ class StoryList {
       url: `${BASE_URL}/stories`,
       data: { token, story: { title, author, url } },
     });
-    console.log(response)
+    //this is the format for the new story instance 
 
     
     const story = new Story(response.data.story);
     this.stories.unshift(story);
+    //unshift adds story to beginning of stories
     user.ownStories.unshift(story);
-   console.log("user.ownStories:", user.ownStories)
-console.log(story)
-putOwnStoriesOnPage(story);
-//note I am not sure whether this should be here or not
+    // unshift adds story to beginning of own stories
     return story;
 
   }
@@ -233,6 +231,7 @@ class User {
 
   // the problem with doing the way I thought of before would be that you would have to figure out a way to associate the cloned item from the origin because you are clicking the original and wanting to remove the clone. Its easier push the story into the favorites that are already set up 
     this.favorites.push(story);
+    // adding story into favorites
     // console.log(this.favorites)
     // this is adding the favorites attached to the user. 
     await this.addOrRemove('add', story);
@@ -254,13 +253,18 @@ class User {
 
 async removeFavorites(story) {
  this.favorites = this.favorites.filter(s => s.storyId !== story.storyId)
-//  console.log('currentUser:', currentUser)
+ //removing all the stories whose story id does not match the story passed into removeFavorites function 
+
+// this.favorites.remove();
+// currentUser.favorites.splice(story);
 
  await this.addOrRemove('remove', story);
 }
 
 async addOrRemove(doAction, story) {
   const method = doAction === 'add' ? 'POST' : 'DELETE';
+  //depending on the actiion called we are either adding and posting the information or deleting the information from the API 
+
   //this is just saying that we are are doing oen thing based on weather or not we are adding the favorite and if not then we are removing the favorite. 
   const token = this.loginToken;
   //use this instance of the logintoken
@@ -277,16 +281,19 @@ async removeUserStoryFromStoriesList(storyInMain) {
   let idxStoryRemoved = storyList.stories.indexOf(storyInMain);
 storyList.stories.splice(idxStoryRemoved, 1);
 }
+//removing story from storiesList on Dom
 
 async removeUserStoryFromOwnStories(storyInOwnStories) {
   let idxStoryRemoved = currentUser.ownStories.indexOf(storyInOwnStories);
   currentUser.ownStories.splice(idxStoryRemoved, 1);
 }
+//removing story from ownStories on Dom
 
 async removeUserStoryFromFavoritesList(storyInFavorites) {
   let idxStoryRemoved = currentUser.favorites.indexOf(storyInFavorites);
   currentUser.favorites.splice(idxStoryRemoved, 1)
 }
+//removing story from facorites on Dom
 
  async removeOwnStoryFromAPI(storyInMain) {
 
@@ -298,6 +305,6 @@ async removeUserStoryFromFavoritesList(storyInFavorites) {
     data: { token },
   }); 
 }
-
+// remove story from API
 }
 
