@@ -39,37 +39,6 @@ function updateNavOnLogin() {
   $navUserProfile.text(`${currentUser.username}`).show();
 }
 
-
-// $submit.on("click", navAddStory);
-// const submitBtn = document.getElementById('submitBtn')
-// console.log(submitBtn)
-// submitBtn.on('click', navAddStory);
-// $storyForm.on("click", navAddStory);
-// // console.log($submitBtn)
-
-// function navAddStory(evt) {
-//   console.debug("navAddStory", evt);
-//   // evt.preventDefault();
-// // $submitForm.show();
-// $allStoriesList.show()
-// // $myStoriesForm.addClass("hidden");
-// $myStoriesList.addClass("hidden");
-// submitNewStory();
-// // note that you need to figure out a way to get rid of the myStoriesLi which is staying appended on on click for some reason
-// // addNewStories();
-
-// }
-
-// function navSubmitStoryClick(evt) {
-//   console.debug("navSubmitStoryClick", evt);
-//   hidePageComponents();
-//   $allStoriesList.show();
-//   $submitForm.show();
-// }
-
-// $navSubmitStory.on("click", navSubmitStoryClick);
-// just added thiss function 
-
 $navSubmit.on("click", unhideStoryClass);
 
 function unhideStoryClass() {
@@ -104,23 +73,5 @@ function unhideMyStories() {
   $favoritesForm.addClass("hidden");
   hidePageComponents();
 }
-// unknow why this is running automatically it should not be 
 
-// $favoritesStar.addEventListener("click", addFavorites())
-
-// $favoritesStar.on("click", addFavorites);
-
-// function addFavorites(evt) {
-//   evt.preventDefault();
-//   // console.debug("addFavorites", evt);
-//   console.log('You clicked the star!')
-// }
-// console.log($favoritesStar)
-
-// $favoritesStar.on("click", function(e) {
-//   e.preventDefault()
-//   console.log('you clicked the star')
-// } )
-
-// document.querySelector('.fa-star').addEventListener("click", function(e){console.log('click')})
 

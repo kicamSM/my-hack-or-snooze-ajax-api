@@ -215,49 +215,14 @@ class User {
 
 
   async addFavorites(story) {
-    // console.log(e.target)
-// console.log('you are running addFavorites funtion')
-    // const favoriteElement = e.target.closest('ol li');
-    //   // favoriteElement.setAttribute('class', 'favorite');
-    //   // console.log(favoriteElement) 
-
-    // if(!favoriteElement.classList.contains('favorite')) {
-    // // favoriteElement.setAttribute('class', 'favorite'); 
-    // // console.log(favoriteElement)
-    // const cloneFavoriteElement = favoriteElement.cloneNode(true);
-    // // console.log(cloneFavoriteElement);
-   
-    // $allFavoritesList.prepend(cloneFavoriteElement);
-
-  // the problem with doing the way I thought of before would be that you would have to figure out a way to associate the cloned item from the origin because you are clicking the original and wanting to remove the clone. Its easier push the story into the favorites that are already set up 
     this.favorites.push(story);
-    // adding story into favorites
-    // console.log(this.favorites)
     // this is adding the favorites attached to the user. 
     await this.addOrRemove('add', story);
-
-
-  //   } else {
-  //     favoriteElement.removeAttribute('class', 'favorite'); 
-  //     console.log(favoriteElement)
-  //     $allFavoritesList
-  //     console.log($allFavoritesList)
-      
-  
-
-  //   }
-  //   // so it appears as prepnding an element automatically removes it from the list 
-  //   // console.log($allFavoritesList);
-  // }
 }
 
 async removeFavorites(story) {
  this.favorites = this.favorites.filter(s => s.storyId !== story.storyId)
  //removing all the stories whose story id does not match the story passed into removeFavorites function 
-
-// this.favorites.remove();
-// currentUser.favorites.splice(story);
-
  await this.addOrRemove('remove', story);
 }
 
@@ -273,7 +238,6 @@ async addOrRemove(doAction, story) {
     method: method,
     data: { token },
   }); 
-  // console.log(this.favorites)
   // adding or removing information from favorites on this user. Grabbing the story information through the id. Must have a method, i.e. add or remove 
 }
 
